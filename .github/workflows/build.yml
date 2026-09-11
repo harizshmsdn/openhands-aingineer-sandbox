@@ -10,8 +10,9 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  # Published image name, deliberately decoupled from the repository name.
-  IMAGE_NAME: ${{ github.repository_owner }}/openhands-aingineer-sandbox
+  # Must match the repository name: GITHUB_TOKEN's packages:write scope only
+  # covers packages owned by this repo, so a different name gets write_package denied.
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   # Each architecture builds on its own native runner (no QEMU emulation) and
