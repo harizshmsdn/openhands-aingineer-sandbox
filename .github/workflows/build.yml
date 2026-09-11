@@ -49,7 +49,10 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          # GHCR_TOKEN (a PAT with write:packages) is needed because the target
+          # package pre-existed and is not linked to this repo, so GITHUB_TOKEN
+          # is denied write_package. Falls back to GITHUB_TOKEN if unset.
+          password: ${{ secrets.GHCR_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Build and push by digest
         id: build
@@ -108,7 +111,10 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          # GHCR_TOKEN (a PAT with write:packages) is needed because the target
+          # package pre-existed and is not linked to this repo, so GITHUB_TOKEN
+          # is denied write_package. Falls back to GITHUB_TOKEN if unset.
+          password: ${{ secrets.GHCR_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Create and push manifest list
         working-directory: /tmp/digests
