@@ -10,7 +10,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  # Published image name, deliberately decoupled from the repository name.
+  IMAGE_NAME: ${{ github.repository_owner }}/openhands-aingineer-sandbox
 
 jobs:
   # Each architecture builds on its own native runner (no QEMU emulation) and
