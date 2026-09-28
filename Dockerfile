@@ -10,7 +10,7 @@ USER root
 # Install system tools: build-essential, Node.js, Azure CLI, Pandoc, and jq.
 # The Azure CLI installer has no Debian trixie repo and falls back to bookworm.
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates curl pandoc jq build-essential \
+    && apt-get install -y --no-install-recommends ca-certificates curl pandoc jq build-essential dnsutils git \
     && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
     && curl -sL https://aka.ms/InstallAzureCLIDeb | bash \
@@ -32,12 +32,13 @@ RUN apt-get update \
 #   browser   : playwright
 ENV PLAYWRIGHT_BROWSERS_PATH=/opt/ms-playwright
 RUN pip install --no-cache-dir \
-        "docling-slim[cli,convert-core,format-pdf-pypdfium2,format-office,format-email,format-html,format-markdown]" \
-        pypdf pdfplumber python-docx openpyxl xlsxwriter \
-        jinja2 premailer beautifulsoup4 html2text \
-        azure-communication-email azure-identity msal imapclient extract-msg \
-        pandas tabulate requests httpx python-dateutil \
-        playwright \
+    "docling-slim[cli,convert-core,format-pdf-pypdfium2,format-office,format-email,format-html,format-markdown]" \
+    pypdf pdfplumber python-docx openpyxl xlsxwriter \
+    jinja2 premailer beautifulsoup4 html2text \
+    azure-communication-email azure-identity msal imapclient extract-msg \
+    pandas tabulate requests httpx python-dateutil \
+    playwright duckduckgo-search \
+    "git+https://github.com/laramies/theHarvester.git@4.11.1" \
     && playwright install --with-deps chromium \
     && chmod -R a+rX /opt/ms-playwright
 

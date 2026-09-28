@@ -1,0 +1,25 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# IDE and local editor configurations
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Secrets and local environment files
+.env
+*.pem
+*.key
+
+# Local workspace and patch files
+workspace/
+*.patch
+scratch/
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
